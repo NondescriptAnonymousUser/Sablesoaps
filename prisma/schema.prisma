@@ -1,0 +1,25 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "sqlite"; url = env("DATABASE_URL") }
+
+model WaitlistSignup {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  source    String?
+  createdAt DateTime @default(now())
+}
+
+model PartnerInquiry {
+  id              Int      @id @default(autoincrement())
+  name            String
+  email           String
+  company         String
+  website         String?
+  location        String?
+  productTypes    String?
+  capacityMonthly Int?
+  moqUnits        Int?
+  leadTimeWeeks   Int?
+  notes           String?
+  createdAt       DateTime @default(now())
+}
