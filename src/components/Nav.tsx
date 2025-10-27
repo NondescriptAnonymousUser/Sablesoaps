@@ -1,9 +1,11 @@
 "use client";
+
 import Link from "next/link";
+import type { Route } from "next";   // 👈 bring in Route type
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 
-const links = [
+const links: { href: Route; label: string }[] = [
   { href: "/", label: "Home" },
   { href: "/evidence", label: "Evidence" },
   { href: "/for-manufacturers", label: "Manufacturers" },
@@ -20,7 +22,11 @@ export default function Nav() {
         </Link>
         <nav className="flex items-center gap-6 text-sm">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className={`hover:opacity-80 ${pathname === l.href ? "text-fg" : "text-sub"}`}>
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`hover:opacity-80 ${pathname === l.href ? "text-fg" : "text-sub"}`}
+            >
               {l.label}
             </Link>
           ))}
