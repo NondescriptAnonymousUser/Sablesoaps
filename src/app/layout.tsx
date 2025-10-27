@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
 const brand = process.env.NEXT_PUBLIC_BRAND_NAME ?? "Sable Soaps";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sablesoaps.com";
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     template: `%s | ${brand}`,
   },
   description: "Modern, minimalist hygiene—without the hidden stuff.",
-  alternates: { canonical: "/" },
+  alternates: { canonical: siteUrl }, // use absolute URL to avoid type weirdness
   openGraph: {
     type: "website",
     url: siteUrl,
@@ -30,3 +31,13 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body className={`${inter.variable} font-sans`}>{children}</body>
+    </html>
+  );
+}
